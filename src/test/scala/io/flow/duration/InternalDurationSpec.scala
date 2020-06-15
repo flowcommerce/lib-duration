@@ -7,6 +7,29 @@ import org.scalatest.matchers.must.Matchers
 
 class InternalDurationSpec extends AnyWordSpec with Matchers {
 
+  "readme example" in {
+    val duration1 = InternalDuration(3, UnitOfTime.Month)
+    val duration2 = InternalDuration(12, UnitOfTime.Hour)
+
+    if (duration1.isShorterThan(duration2)) {
+      println(s"Duration '${duration1.label}' is shorter than '${duration2.label}'")
+    } else {
+      println(s"Duration '${duration2.label}' is shorter than '${duration1.label}'")
+    }
+
+    val minDuration = Seq(duration1, duration2).min
+    println(s"Shortest duration is: ${minDuration.label}")
+  }
+
+  "sorted" in {
+    def dur(unit: UnitOfTime) = InternalDuration(1, unit)
+    Seq(
+      dur(Year), dur(Month), dur(Week), dur(Day), dur(Hour), dur(Minute),
+    ).sorted.map(_.label) must equal(
+      Seq("1 minute", "1 hour", "1 day", "1 week", "1 month", "1 year")
+    )
+  }
+
   "label" in {
     def test(value: Long, unit: UnitOfTime) = InternalDuration(value, unit).label
 
