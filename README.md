@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/flowcommerce/lib-duration.svg?branch=master)](https://travis-ci.com/flowcommerce/lib-duration)
+[![Build Status](https://travis-ci.com/flowcommerce/lib-duration.svg?branch=primary)](https://travis-ci.com/flowcommerce/lib-duration)
 
 Scala library to make working with Flow's Common Duration object easier.
 
