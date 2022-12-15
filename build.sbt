@@ -4,6 +4,9 @@ organization := "io.flow"
 
 scalaVersion := "2.13.6"
 
+enablePlugins(GitVersioning)
+git.useGitDescribe := true
+
 lazy val allScalacOptions = Seq(
   "-feature",
   "-Xfatal-warnings",
@@ -40,4 +43,3 @@ publishTo := {
 }
 
 scalacOptions ++= allScalacOptions
-version := "0.0.23"
