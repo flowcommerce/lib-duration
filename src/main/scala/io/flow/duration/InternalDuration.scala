@@ -31,10 +31,8 @@ case class InternalDuration(value: Long, unitOfTime: UnitOfTime) extends Ordered
 
   def isShorterThan(that: InternalDuration): Boolean = compare(that) < 0
 
-  /**
-   * Compares two internal durations. If the unit of time is
-   * undefined, we consider the two durations equal
-   */
+  /** Compares two internal durations. If the unit of time is undefined, we consider the two durations equal
+    */
   override def compare(that: InternalDuration): Int = {
     if (this.unitOfTime == that.unitOfTime) {
       this.value.compare(that.value)
@@ -47,13 +45,16 @@ case class InternalDuration(value: Long, unitOfTime: UnitOfTime) extends Ordered
         (this.days, that.days),
         (this.weeks, that.weeks),
         (this.months, that.months),
-        (this.years, that.years),
-      ).view.flatMap {
-        case (Some(a), Some(b)) => Some(a.compare(b))
-        case (_, _) => None
-      }.headOption.getOrElse {
-        this.estimateInMinutes.compare(that.estimateInMinutes)
-      }
+        (this.years, that.years)
+      ).view
+        .flatMap {
+          case (Some(a), Some(b)) => Some(a.compare(b))
+          case (_, _) => None
+        }
+        .headOption
+        .getOrElse {
+          this.estimateInMinutes.compare(that.estimateInMinutes)
+        }
     }
   }
 

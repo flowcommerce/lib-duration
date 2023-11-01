@@ -24,7 +24,12 @@ class InternalDurationSpec extends AnyWordSpec with Matchers {
   "sorted" in {
     def dur(unit: UnitOfTime) = InternalDuration(1, unit)
     Seq(
-      dur(Year), dur(Month), dur(Week), dur(Day), dur(Hour), dur(Minute),
+      dur(Year),
+      dur(Month),
+      dur(Week),
+      dur(Day),
+      dur(Hour),
+      dur(Minute)
     ).sorted.map(_.label) must equal(
       Seq("1 minute", "1 hour", "1 day", "1 week", "1 month", "1 year")
     )
@@ -90,7 +95,7 @@ class InternalDurationSpec extends AnyWordSpec with Matchers {
     def test(unit: UnitOfTime, value: Long = 1) = InternalDuration(value, unit).years
 
     test(Year) must equal(Some(1))
-    test(Year,2) must equal(Some(2))
+    test(Year, 2) must equal(Some(2))
     test(Month) must equal(None)
     test(Week) must equal(None)
     test(Day) must equal(None)
@@ -125,8 +130,8 @@ class InternalDurationSpec extends AnyWordSpec with Matchers {
     test(Hour, 24 * 7) must equal(Some(1))
     test(Hour, 48 * 7) must equal(Some(2))
     test(Minute) must equal(None)
-    test(Minute, 24*60*7) must equal(Some(1))
-    test(Minute, 48*60*7) must equal(Some(2))
+    test(Minute, 24 * 60 * 7) must equal(Some(1))
+    test(Minute, 48 * 60 * 7) must equal(Some(2))
   }
 
   "days" in {
@@ -142,8 +147,8 @@ class InternalDurationSpec extends AnyWordSpec with Matchers {
     test(Hour, 24) must equal(Some(1))
     test(Hour, 48) must equal(Some(2))
     test(Minute) must equal(None)
-    test(Minute, 24*60) must equal(Some(1))
-    test(Minute, 48*60) must equal(Some(2))
+    test(Minute, 24 * 60) must equal(Some(1))
+    test(Minute, 48 * 60) must equal(Some(2))
   }
 
   "minutes" in {
